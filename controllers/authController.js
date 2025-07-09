@@ -31,7 +31,7 @@ const loginUser = async (req, res) => {
       logger.warn(`Login failed: wrong password - ${email}`);
       return res.status(400).send({ error: "Invalid credentials" });
     }
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {expires: '1h'});
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET,{ expiresIn: '1h' });
     logger.info(`Login success: ${email}`);
     return res.send({message: 'Login Successfull',token, user: {userId: user._id, email: user.email}});
 
