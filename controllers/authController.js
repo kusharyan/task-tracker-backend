@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
       return res.status(400).send({ error: "Invalid credentials" });
     }
 
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       logger.warn(`Login failed: wrong password - ${email}`);
       return res.status(400).send({ error: "Invalid credentials" });

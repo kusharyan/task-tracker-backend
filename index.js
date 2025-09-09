@@ -10,7 +10,10 @@ const swaggerSpec = require('./swagger');
 
 const authRouter = require('./routes/authRoutes');
 const taskRouter = require('./routes/taskRoutes');
+
 const app = express();
+
+app.use(cors());
 const PORT = Number(process.env.PORT);
 const mongoUrl = process.env.MONGO_URL;
 
@@ -25,7 +28,7 @@ async function startServer() {
 };
 
 app.use(express.json());
-app.use(cors())
+
 app.use('/api', authRouter);
 app.use('/api/tasks', taskRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
